@@ -18,14 +18,13 @@
         "react"
     ],
     "rules": {
+        "no-unused-vars": 1,
+        "react/prop-types": 1,
         "indent": [
             "error",
             "tab"
         ],
-        "quotes": [
-            "error",
-            "single"
-        ],
+        "quotes": 0,
         "semi": [
             "error",
             "always"

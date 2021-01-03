@@ -1,0 +1,32 @@
+[
+    {
+        "key": "Name",
+        "con": ["Contains"],
+        "type": "string"
+    },
+    {
+        "key": "Screen Name",
+        "con": ["Contains"],
+        "type": "string"
+    },
+    {
+        "key": "Followers Count",
+        "con": [">=", "<="],
+        "type": "number"
+    },
+    {
+        "key": "Following Count",
+        "con": [">=", "<="],
+        "type": "number"
+    },
+    {
+        "key": "Location",
+        "con": ["Contains"],
+        "type": "string"
+    },
+    {
+        "key": "Verified",
+        "con": ["Equals"],
+        "type": "boolean"
+    }
+]
