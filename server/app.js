@@ -6,12 +6,37 @@ const app = express();
 const infoRouter = require('./routes/info');
 
 const PORT = process.env.PORT || 8080;
+const DB_URI = process.env.DB_URI || "mongodb://localhost";
+
+const dbOptions = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    dbName: "easylife_dev",
+    w: "majority",
+};
+
+mongoose.connect( DB_URI, dbOptions ).catch(err => {
+    console.log("Couldn't connect to remote DB. Trying to connect to localhost...");
+
+    mongoose.connect("mongodb://localhost", dbOptions)
+                .catch(
+                    err => console.error(err)
+                )
+})
+
+mongoose.connection.on( "error", (err) => {
+    console.error(`[${err.code}] There was an error in DB connection: mongo DB couldn't be reached`);
+})
+
+mongoose.connection.once( "open", () => {
+    console.log(`Connected to the database: ${mongoose.connection.db.databaseName}`);
+})
 
 app.use(morgan("dev")); // log requests
 app.set('trust proxy', 1);  // Trust the nth hop from the front-facing proxy server as the client.
 app.use(express.urlencoded({extended: false})); // use the querystring library
 
-app.use(express.json());
 app.use(express.json());
 
 // ROUTES START
