@@ -12,7 +12,7 @@ const dbOptions = {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
-    dbName: "easylife_dev",
+    dbName: "frast",
     w: "majority",
 };
 
