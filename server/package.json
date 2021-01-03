@@ -3,7 +3,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "deploy_check": "node deploy.ign.js"
   },
   "dependencies": {
     "express": "^5.0.0-alpha.8",

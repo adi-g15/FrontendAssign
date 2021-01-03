@@ -57,6 +57,6 @@ app.use((err, req, res, next) => {
 });
 
 	// no need to explicitly mount on http
-app.listen(() => {
+module.exports = app.listen(() => {
 	console.info(`Server listening on ${PORT}...`);
 })
