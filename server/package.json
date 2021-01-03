@@ -1,0 +1,8 @@
+{
+  "author": "adi-g15",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.0.0-alpha.8",
+    "mongoose": "^5.9.27"
+  }
+}
