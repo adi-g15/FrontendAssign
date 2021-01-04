@@ -10,7 +10,7 @@ export default function Filters(props) {
 				{
 					supportedOperations.map((val,index) => (
 						<div key={index}>
-							{val.key}
+							{val.name}
 						</div>
 					))
 				}

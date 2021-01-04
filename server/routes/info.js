@@ -15,7 +15,7 @@ router.use(infoRateLimiter);
  * @request body -> It may contain the filters
  *              {
  *                  // optional
- *                  filters: [{key: count, con: >=, val: 45}, {...}, {...}]
+ *                  filters: [{name: count, opr: >=, val: 45}, {...}, {...}]
  *              }
  * 
  * @response - 200 When successfull
@@ -29,7 +29,7 @@ router.get("/profiles", (req, res) => {
 
     if( req.body.filters && Array.isArray( req.body.filters ) ) {
         req.body.filters.forEach(filter => {
-            switch (filter.key) {
+            switch (filter.name) {
                 case 'name':
                     where['name'] = RegExp(`/${filter.val}/i`)    // only single condition supported for names and location field
                     break;
@@ -40,15 +40,15 @@ router.get("/profiles", (req, res) => {
                     where['location'] = RegExp(`/${filter.val}/i`)
                     break;
                 case 'followers_count':
-                    if( filter.con === '>=' ) where['followers_count']['$gte'] = filter.val
-                    else if( filter.con === '<=' ) where['followers_count']['$lte'] = filter.val
+                    if( filter.opr === '>=' ) where['followers_count']['$gte'] = filter.val
+                    else if( filter.opr === '<=' ) where['followers_count']['$lte'] = filter.val
                     break;
                 case 'following_count':
-                    if( filter.con === '>=' ) where['following_count']['$gte'] = filter.val
-                    else if( filter.con === '<=' ) where['following_count']['$lte'] = filter.val
+                    if( filter.opr === '>=' ) where['following_count']['$gte'] = filter.val
+                    else if( filter.opr === '<=' ) where['following_count']['$lte'] = filter.val
                     break;
                 case 'verified':
-                    filter.val === filter.val === 'false' ? false : true;   // expecting that IF key is present, IT MUST be having a value (filter.val)
+                    filter.val === filter.val === 'false' ? false : true;   // expecting that IF name is present, IT MUST be having a value (filter.val)
                     where['verified'] = filter.val;
                     break;
             }

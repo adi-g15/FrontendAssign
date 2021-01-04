@@ -1,32 +1,32 @@
 [
     {
-        "key": "Name",
-        "con": ["Contains"],
+        "name": "Name",
+        "opr": ["Contains"],
         "type": "string"
     },
     {
-        "key": "Screen Name",
-        "con": ["Contains"],
+        "name": "Screen Name",
+        "opr": ["Contains"],
         "type": "string"
     },
     {
-        "key": "Followers Count",
-        "con": [">=", "<="],
+        "name": "Followers Count",
+        "opr": [">=", "<="],
         "type": "number"
     },
     {
-        "key": "Following Count",
-        "con": [">=", "<="],
+        "name": "Following Count",
+        "opr": [">=", "<="],
         "type": "number"
     },
     {
-        "key": "Location",
-        "con": ["Contains"],
+        "name": "Location",
+        "opr": ["Contains"],
         "type": "string"
     },
     {
-        "key": "Verified",
-        "con": ["Equals"],
+        "name": "Verified",
+        "opr": ["Equals"],
         "type": "boolean"
     }
 ]
