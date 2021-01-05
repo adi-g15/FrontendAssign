@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/filter.css";
+import PropTypes from "prop-types";
+import "../styles/filter.css";
 
-export default function FilterField(props) {
+function FilterField(props) {
 	useEffect(() => {
 		if(props.filter.name) {    // @todo - add to props validation
 			console.log("Null it");
@@ -94,6 +95,29 @@ export default function FilterField(props) {
 					)
 				}
 			</span>
+			<span className="input_span">
+				<button className="delete_btn" onClick={() => props.removeFilter(props.index)}>
+				❎
+				</button>
+			</span>
 		</div>
 	);
 }
+
+FilterField.propTypes = {
+	filter: PropTypes.shape({
+		name: PropTypes.string,
+		opr: PropTypes.string,
+		val: PropTypes.string
+	}),
+	lastFieldHandler: PropTypes.func,
+	operations: PropTypes.arrayOf(PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		opr: PropTypes.arrayOf(PropTypes.string).isRequired,
+		type: PropTypes.string.isRequired
+	})).isRequired,
+	index: PropTypes.number.isRequired,
+	removeFilter: PropTypes.func.isRequired
+};
+
+export default FilterField;
