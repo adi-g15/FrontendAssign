@@ -17,17 +17,20 @@ export default function FilterField(props) {
 	const [linkedOperation, setLink] = useState(null);
 
 	function modifyName(e) {
-		if( !props.operations.find(operation => operation.name === e.target.value) ) return;
+		let linkedOperation = props.operations.find(operation => operation.name === e.target.value);
+		if( !linkedOperation ) return;
 
 		props.filter.name = e.target.value;
 		setName(e.target.value);
-		setLink(props.operations.find(operation => operation.name === e.target.value));
+		props.filter.opr = linkedOperation.opr[0];
+		setLink(linkedOperation);
+		setOperator(linkedOperation.opr[0]);
 	}
 
 	function modifyOperator(e) {
 		props.filter.opr = e.target.value || e.target.checked;
-		if(isLast &&  val && e.target.value) {
-			console.debug("here");
+		// console.debug("Changed opr - ", isLast, e.target.value, val);
+		if(isLast && e.target.value && val) {
 			props.lastFieldHandler();
 			toggleIsLast(null);
 		}
@@ -37,8 +40,8 @@ export default function FilterField(props) {
 
 	function handleValueChange(e) {
 		props.filter.val = e.target.value;
-		if(isLast &&  val && operator) {
-			console.debug("here");
+		// console.debug("Changed value - ", isLast, operator, e.target.value);
+		if(isLast && e.target.value && operator) {
 			props.lastFieldHandler();
 			toggleIsLast(null);
 		}
@@ -59,14 +62,14 @@ export default function FilterField(props) {
 				</datalist>
 			</span>
 			<span className="input_span">
-				<input list={`operators_${props.index}`} value={operator} onChange={modifyOperator} />
-				<datalist id={`operators_${props.index}`} className="key_name">
+				{/* <input list={`operators_${props.index}`}/> */}
+				<select value={operator} onChange={modifyOperator} className="key_name">
 					{
 						linkedOperation && linkedOperation.opr.map((oper, index) => (
-							<option key={index} value={oper} />
+							<option key={index} value={oper}>{oper}</option>
 						))
 					}
-				</datalist>
+				</select>
 			</span>
 			<span className="input_span">
 				{
@@ -77,11 +80,17 @@ export default function FilterField(props) {
 							linkedOperation.type === 'number' ? (
 								<input type="number" value={val}  onChange={handleValueChange} />
 							) : (
-								<input type="checkbox" checked={val} onChange={handleValueChange} />
+								<>
+									<input list={`bools_${props.index}`} onChange={handleValueChange} />
+									<datalist id={`bools_${props.index}`}>
+										<option>True</option>
+										<option>False</option>
+									</datalist>
+								</>
 							)
 						)
 					): (
-						<input type="text" value={val} disabled/>
+						<input value={val} disabled/>
 					)
 				}
 			</span>

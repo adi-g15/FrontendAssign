@@ -1,24 +1,28 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     background: linear-gradient(to right, white, lightgreen, lightblue);
 }
 
 input {
+    margin-right: 1.8vw;
+}
+
+input, select {
     border: none;
+    width: 20vw;
     border-bottom: 1vh solid blue;
     padding: 2% 4%;
-    margin: 2% 4%;
-    transition: 0.5s;
+    transition: 5s;
 }
 
 button {
     border: 0;
-    padding: 2% 4%;
-    margin: 2% 4%;
+    padding: 1%;
+    margin: 1%;
 }
 
 /* just for reference, replace later */

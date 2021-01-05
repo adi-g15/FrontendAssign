@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FilterField from "./filterField";
 import { useSelector } from "react-redux";
 import { getUnusedOperations } from '../../utils/difference';
@@ -8,9 +8,10 @@ export default function Filters(props) {
 	const allOper = useSelector(state => state.opr);
 	const [filters, setFilters] = useState([]); // initially empty, later use useSelector
 	const [emptyFilter, toggleEmpty] = useState(false);	// signifies whether the last filter added is empty/not yet full
-	const [spareOper, setSpareOper] = useState( getUnusedOperations(allOper, filters) );	// operations that still can be used
+	const [spareOper, setSpareOper] = useState([]);	// operations that still can be used
 
 	function addEmptyField() {
+		setSpareOper( getUnusedOperations(allOper, filters) );	// update the usable operations list
 		setFilters([...filters, {name: null}]);	// if name is null, then FilterField knows it's the newest one
 
 		toggleEmpty(true);
@@ -24,7 +25,6 @@ export default function Filters(props) {
 		toggleEmpty(false);
 
 		console.log("Called last field");
-		setSpareOper( getUnusedOperations(allOper, filters) );	// update the usable operations list
 	}
 
 	return (
