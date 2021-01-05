@@ -10,9 +10,8 @@ function deepCopy( operationArr ) {
 	if( !Array.isArray(operationArr) )	return null;
 
 	return operationArr.map(obj => ({
-		name: obj.name,
-		opr: [...obj.opr],	// we also need a copy of this, since earlier, even in the copy, it was accessing the same refernce of array
-		type: obj.type
+		...obj,
+		opr: [...obj.opr]	// we also need a copy of this, since earlier, even in the copy, it was accessing the same refernce of array
 	}));
 }
 

@@ -1,0 +1,3 @@
+* Firebase connectivity
+* Styling
+* Paging

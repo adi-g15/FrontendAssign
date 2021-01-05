@@ -22,8 +22,10 @@ function FilterField(props) {
 		if( !linkedOperation ) return;
 
 		props.filter.name = e.target.value;
-		setName(e.target.value);
+		props.filter.key_name = linkedOperation.key_name;
 		props.filter.opr = linkedOperation.opr[0];
+
+		setName(e.target.value);
 		setLink(linkedOperation);
 		setOperator(linkedOperation.opr[0]);
 	}
@@ -48,6 +50,7 @@ function FilterField(props) {
 		}
 
 		setValue(e.target.value);
+		props.toggleRender();
 	}
 
 	return (
@@ -108,16 +111,19 @@ FilterField.propTypes = {
 	filter: PropTypes.shape({
 		name: PropTypes.string,
 		opr: PropTypes.string,
-		val: PropTypes.string
+		val: PropTypes.string,
+		key_name: PropTypes.string
 	}),
 	lastFieldHandler: PropTypes.func,
 	operations: PropTypes.arrayOf(PropTypes.shape({
 		name: PropTypes.string.isRequired,
 		opr: PropTypes.arrayOf(PropTypes.string).isRequired,
-		type: PropTypes.string.isRequired
+		type: PropTypes.string.isRequired,
+		key_name: PropTypes.string
 	})).isRequired,
 	index: PropTypes.number.isRequired,
-	removeFilter: PropTypes.func.isRequired
+	removeFilter: PropTypes.func.isRequired,
+	toggleRender: PropTypes.func.isRequired
 };
 
 export default FilterField;

@@ -54,6 +54,7 @@ function Filters(props) {
 							key={index}
 							lastFieldHandler={lastFieldHandler}
 							removeFilter={removeFilter}
+							toggleRender={props.toggleRender}
 						/>
 					))
 				}
@@ -72,9 +73,11 @@ Filters.propTypes = {
 	filters: PropTypes.arrayOf( PropTypes.shape({
 		name: PropTypes.string,
 		opr: PropTypes.string,
-		val: PropTypes.string
+		val: PropTypes.string,
+		key_name: PropTypes.string
 	})).isRequired,
-	setFilters: PropTypes.func.isRequired
+	setFilters: PropTypes.func.isRequired,
+	toggleRender: PropTypes.func.isRequired
 };
 
 export default Filters;

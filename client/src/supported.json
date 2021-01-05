@@ -2,31 +2,37 @@
     {
         "name": "Name",
         "opr": ["Contains"],
-        "type": "string"
+        "type": "string",
+        "key_name": "name"
     },
     {
         "name": "Screen Name",
         "opr": ["Contains"],
-        "type": "string"
+        "type": "string",
+        "key_name": "screen_name"
     },
     {
         "name": "Followers Count",
         "opr": [">=", "<="],
-        "type": "number"
+        "type": "number",
+        "key_name": "followers_count"
     },
     {
         "name": "Following Count",
         "opr": [">=", "<="],
-        "type": "number"
+        "type": "number",
+        "key_name": "following_count"
     },
     {
         "name": "Location",
         "opr": ["Contains"],
-        "type": "string"
+        "type": "string",
+        "key_name": "location"
     },
     {
         "name": "Verified",
         "opr": ["Equals"],
-        "type": "boolean"
+        "type": "boolean",
+        "key_name": "verified"
     }
 ]

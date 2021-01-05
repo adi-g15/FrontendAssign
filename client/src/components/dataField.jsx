@@ -10,7 +10,7 @@ function DataField(props) {
 			<td>{props.followers_count}</td>
 			<td>{props.following_count}</td>
 			<td>{props.location}</td>
-			<td>{props.verified}</td>
+			<td>{props.verified ? "True": "False"}</td>
 		</tr>
 	);
 }
@@ -21,7 +21,7 @@ DataField.propTypes = {
 	followers_count: PropTypes.number,
 	following_count: PropTypes.number,
 	location: PropTypes.string.isRequired,
-	verified: PropTypes.oneOf(["True", "False"])
+	verified: PropTypes.bool
 };
 
 export default DataField;

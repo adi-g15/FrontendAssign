@@ -35,28 +35,29 @@ function DataTable(props) {
 			return filters.every(filter => {
 				switch (filter.opr) {
 				case CONTAINS:
-					if( RegExp(`/${filter.val}/i`).test(profile[filter.name]) ){
+					console.log(`Checking if ${profile[filter.key_name]} contains ${filter.val}`, RegExp(`/${filter.val}/i`).test(profile[filter.key_name]) );
+					if( !RegExp(filter.val, 'i').test(profile[filter.key_name]) ){
 						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
 
 				case GTE:
-					if( profile[filter.name] < parseInt(filter.val) ){
+					if( profile[filter.key_name] < parseInt(filter.val) ){
 						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
 
 				case LTE:
-					if( profile[filter.name] > parseInt(filter.val) ){
+					if( profile[filter.key_name] > parseInt(filter.val) ){
 						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
 
 				case EQUALS:
-					if( profile[filter.name].toString() !== filter.val.toLowerCase() ){
+					if( profile[filter.key_name].toString() !== filter.val.toLowerCase() ){
 						console.log("Out: ", filter, profile);
 						return false;
 					}
@@ -78,9 +79,9 @@ function DataTable(props) {
 			/>
 		));
 
-		console.log(newFiltered);
 		if(newFiltered.length === 0) toggleNoResult(true);
 		else {
+			toggleNoResult(false);
 			setFiltered( newFiltered );
 		}
 	}
