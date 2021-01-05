@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavBar from './components/navbar';
 import Filters from "./components/filters";
 // import Filters from './components/filters';
 import DataTable from './components/datatable';

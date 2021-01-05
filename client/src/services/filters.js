@@ -5,7 +5,7 @@ import Operations from "../supported.json";
 
 export function fetchOperations() {
 
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve) => {
 
 		// @future - Can be fetched from hitting an API
 		resolve(Operations);
