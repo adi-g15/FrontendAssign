@@ -7,10 +7,6 @@ name: Deploy to Firebase Hosting
     branches:
       - main
 
-defaults:
-  run:
-    working-directory: ./client
-
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -23,6 +19,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ASSIGNMENT_7D2C8 }}'
           channelId: live
           projectId: assignment-7d2c8
-          entryPoint: client/
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels

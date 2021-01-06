@@ -4,6 +4,5 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/adi-g15/frast/badge?s=013d0d30ebb266d8517171a3eb3434f38bb31b3a)](https://www.codefactor.io/repository/github/adi-g15/frast)
 
 ![Deploy to Firebase Hosting](https://github.com/adi-g15/FrAst/workflows/Deploy%20to%20Firebase%20Hosting%20on%20merge/badge.svg)
-![Custom Deploy Check](https://github.com/adi-g15/FrAst/workflows/Custom%20Deploy%20Check/badge.svg)
 
 > Will update the README 'after' it's completed, for now, there are in code comments

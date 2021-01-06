@@ -5,16 +5,25 @@ import "../styles/data.css";
 import { fetchProfiles } from '../services/profiles';
 import { CONTAINS, EQUALS, GTE, LTE } from '../constants/opTypes';
 
+import firebaseConfig from "../config/firebase";
+import firebase from "firebase/app";
+import "firebase/database";
+
+firebase.initializeApp(firebaseConfig);
+
 function DataTable(props) {
-	const [profiles, setProfiles] = useState([]);
 	const [noResult, toggleNoResult] = useState(false);
 	const [loading, toggleLoading] = useState(true);
 	const [filtered, setFiltered] = useState([]);
+	let profileRef = firebase.database().ref("profiles");
 
 	useEffect(() => {
+		profileRef.on("value", (snapshot) => {
+			console.log(snapshot);
+		});
 		fetchProfiles()
 			.then(profiles => {
-				setProfiles(profiles);
+				// setProfiles(profiles);
 			})
 			.catch(err => {
 				alert(err.msg || "It seems there is a problem with connectivity");
