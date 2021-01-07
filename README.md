@@ -10,7 +10,7 @@
 Build a general dynamic table filter component that generates a filter query
 object in a specific format and consume it to filter a table with data fetched from firebase (used firebase as source)
 
-> FrontEnd - React
+> FrontEnd - Gatsby/React
 >
 > Database - FireStore
 
@@ -36,8 +36,8 @@ object in a specific format and consume it to filter a table with data fetched f
 ```
 .
 ├───.github/workflows
-├───public
 └───src
+    ├───pages (route page, only index.tsx)
     ├───components (src for react components)
     ├───config
     ├───constants (operation types)
@@ -46,7 +46,7 @@ object in a specific format and consume it to filter a table with data fetched f
 ```
 
 ### Pages
-Index page (`/`) - It's source code is in `/src/App.jsx`
+Index page (`/`) - It's source code is in `/pages/index.tsx`
 
 ### Brief Implementation Details -
 * `<App />` component is a div containing `<Filters />` and `<DataTable />`, and these two child components are connected to each other, using state variables in the parent, ie. `<App />`
@@ -56,7 +56,7 @@ Index page (`/`) - It's source code is in `/src/App.jsx`
 
 * Another key thing is, that logical operators like `==`, `>=`, `<=` can only be used once, that's a restriction imposed in the code itself, more can be seen in the file `src/components/filters.jsx` and the filtering of these operations from future usage is being done in `utils/difference.js`
 
- > Suggested Order Exploring the codebase - index.js, App.js, Filters.js, FilterField, DataTable, then for more detail, difference.js
+ > Suggested Order Exploring the codebase - pages/index.tsx, Filters.tsx, FilterField, DataTable, then for more detail, difference.ts
 
 ## Todo
   * 👍 Styling
