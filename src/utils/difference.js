@@ -44,7 +44,7 @@ export function getUnusedOperations( allOperations, usedFilters ) {
 
 		for (const filter of usedFilters) {
 			if( operation.type !== "string" && filter.name === operation.name ) {
-				console.log("Matched ", operation, [...operation.opr], filter.opr,[...operation.opr].indexOf(filter.opr));
+				// console.log("Matched ", operation, [...operation.opr], filter.opr,[...operation.opr].indexOf(filter.opr));
 				operation.opr.splice( operation.opr.indexOf(filter.opr), operation.opr.indexOf(filter.opr) !== -1 ? 1: 0 );
 			}
 		}

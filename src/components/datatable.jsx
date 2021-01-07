@@ -2,40 +2,42 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import DataField from "./dataField";
 import "../styles/data.css";
-import { fetchProfiles } from '../services/profiles';
 import { CONTAINS, EQUALS, GTE, LTE } from '../constants/opTypes';
 
-import firebaseConfig from "../config/firebase";
 import firebase from "firebase/app";
-import "firebase/database";
+import "firebase/firestore";
+import firebaseConfig from "../config/firebase";
 
 firebase.initializeApp(firebaseConfig);
 
+const db = firebase.firestore();
+
+// fetchProfiles().then(profiles => profiles.forEach(profile => db.collection("profiles").add(profile)));
 function DataTable(props) {
+	const [profiles, setProfiles] = useState([]);
 	const [noResult, toggleNoResult] = useState(false);
 	const [loading, toggleLoading] = useState(true);
 	const [filtered, setFiltered] = useState([]);
-	let profileRef = firebase.database().ref("profiles");
+	let profileRef = db.collection("profiles");
 
 	useEffect(() => {
-		profileRef.on("value", (snapshot) => {
-			console.log(snapshot);
-		});
-		fetchProfiles()
-			.then(profiles => {
-				// setProfiles(profiles);
+		profileRef.get()
+			.then(snapshot => {
+				const newProfiles = [];
+				snapshot.forEach(doc => newProfiles.push(doc.data()));
+				setProfiles(newProfiles);
 			})
 			.catch(err => {
-				alert(err.msg || "It seems there is a problem with connectivity");
+				alert(err.msg || err.message || "It seems there is a problem with connectivity");
 			})
 			.finally(() => toggleLoading(false));
 	}, []);
 
 	useEffect(() => {
-		console.log(!loading ? "Going to filter": null);
+		!loading && console.debug("Going to filter");
 		// filter profiles only when data loaded, this effect only runs when either props.filters changes, or loading is started/completed
 		!loading && filterProfiles(profiles, props.filters);
-	}, [loading, props.filters, props.shouldUpdate]);
+	}, [loading,/* props.filters,*/ props.shouldFilter]);
 
 	function filterProfiles(profiles, filters) {
 		let newFiltered = profiles.filter(profile => {
@@ -44,30 +46,25 @@ function DataTable(props) {
 			return filters.every(filter => {
 				switch (filter.opr) {
 				case CONTAINS:
-					console.log(`Checking if ${profile[filter.key_name]} contains ${filter.val}`, RegExp(`/${filter.val}/i`).test(profile[filter.key_name]) );
 					if( !RegExp(filter.val, 'i').test(profile[filter.key_name]) ){
-						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
 
 				case GTE:
 					if( profile[filter.key_name] < parseInt(filter.val) ){
-						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
 
 				case LTE:
 					if( profile[filter.key_name] > parseInt(filter.val) ){
-						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
 
 				case EQUALS:
 					if( profile[filter.key_name].toString() !== filter.val.toLowerCase() ){
-						console.log("Out: ", filter, profile);
 						return false;
 					}
 					break;
@@ -133,7 +130,7 @@ DataTable.propTypes = {
 		opr: PropTypes.string,
 		val: PropTypes.string
 	})).isRequired,
-	shouldUpdate: PropTypes.bool.isRequired
+	shouldFilter: PropTypes.bool.isRequired
 };
 
 export default DataTable;

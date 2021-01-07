@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import FilterField from "./filterField";
 import { fetchOperations } from "../services/filters";
@@ -10,6 +10,13 @@ function Filters(props) {
 
 	const [lastFilterEmpty, toggleEmpty] = useState(false);	// signifies whether the last filter added is empty/not yet full
 	const [spareOper, setSpareOper] = useState([]);	// operations that still can be used
+
+	const ALL_OPERATIONS = [];
+
+	useEffect(() => {
+		fetchOperations()
+			.then(docs => ALL_OPERATIONS.push(...docs));
+	});
 
 	async function addEmptyField() {
 		
@@ -29,7 +36,7 @@ function Filters(props) {
 		newFilters.splice(index, 1);
 
 		setFilters(newFilters);
-		if(newFilters.length === 0)	lastFieldHandler();
+		if(newFilters.length === index)	lastFieldHandler();	// the removed filter was the last one
 	}
 
 	/**
@@ -39,7 +46,7 @@ function Filters(props) {
 	function lastFieldHandler() {
 		toggleEmpty(false);
 
-		console.log("Called last field");
+		console.debug("Called last field");
 	}
 
 	return (
@@ -49,12 +56,13 @@ function Filters(props) {
 					filters.map((filter, index) => (
 						<FilterField
 							filter={filter}
-							operations={spareOper}
+							spare_operations={spareOper}
+							ALL_OPERATIONS={ALL_OPERATIONS}
 							index={index}
-							key={index}
+							key={index}	/**Since say you removed the last-1th component, but still when last component takes its place */
 							lastFieldHandler={lastFieldHandler}
 							removeFilter={removeFilter}
-							toggleRender={props.toggleRender}
+							toggleFilter={props.toggleFilter}
 						/>
 					))
 				}
@@ -77,7 +85,7 @@ Filters.propTypes = {
 		key_name: PropTypes.string
 	})).isRequired,
 	setFilters: PropTypes.func.isRequired,
-	toggleRender: PropTypes.func.isRequired
+	toggleFilter: PropTypes.func.isRequired
 };
 
 export default Filters;

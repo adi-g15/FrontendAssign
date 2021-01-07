@@ -16,7 +16,18 @@ input, select {
     width: 20vw;
     border-bottom: 1vh solid blue;
     padding: 2% 4%;
-    transition: 5s;
+    transition: 0.5s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 button {
