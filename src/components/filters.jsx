@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from "prop-types";
 import FilterField from "./filterField";
-import { fetchOperations } from "../services/filters";
+import { fetchOperations } from "../utils/filters";
 import { getUnusedOperations as getUnusedOper } from '../utils/difference';
 import "../styles/filter.css";
 
@@ -68,6 +68,7 @@ function Filters(props) {
 				}
 			</div>
 			<button
+				className="add_filter_btn"
 				disabled={lastFilterEmpty}
 				onClick={addEmptyField}
 			>
