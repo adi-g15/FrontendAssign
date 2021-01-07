@@ -3,7 +3,7 @@
 
 import Operations from "../supported.json";
 
-export function fetchOperations() {
+export function fetchOperations(): Promise<operation[]> {
 
 	return new Promise((resolve) => {
 

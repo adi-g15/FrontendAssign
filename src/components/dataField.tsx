@@ -1,8 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "../styles/data.css";
 
-function DataField(props) {
+interface field_props {
+	name: string,
+	screen_name: string,
+	followers_count: number | 0,
+	following_count: number | 0,
+	location: string,
+	verified: boolean | false
+}
+
+function DataField(props: field_props) {
 	return (
 		<tr className="data_field">
 			<td>{props.name}</td>
@@ -14,14 +22,5 @@ function DataField(props) {
 		</tr>
 	);
 }
-
-DataField.propTypes = {
-	name: PropTypes.string.isRequired,
-	screen_name: PropTypes.string.isRequired,
-	followers_count: PropTypes.number,
-	following_count: PropTypes.number,
-	location: PropTypes.string.isRequired,
-	verified: PropTypes.bool
-};
 
 export default DataField;

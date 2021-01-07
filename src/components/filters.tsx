@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from "prop-types";
 import FilterField from "./filterField";
 import { fetchOperations } from "../utils/filters";
 import { getUnusedOperations as getUnusedOper } from '../utils/difference';
 import "../styles/filter.css";
 
-function Filters(props) {
+interface filter_props {
+	filters: filter[],
+	setFilters: Function,
+	toggleFilter: Function
+}
+
+function Filters(props: filter_props) {
 	const {filters, setFilters} = props;
 
 	const [lastFilterEmpty, toggleEmpty] = useState(false);	// signifies whether the last filter added is empty/not yet full
@@ -77,16 +82,5 @@ function Filters(props) {
 		</>
 	);
 }
-
-Filters.propTypes = {
-	filters: PropTypes.arrayOf( PropTypes.shape({
-		name: PropTypes.string,
-		opr: PropTypes.string,
-		val: PropTypes.string,
-		key_name: PropTypes.string
-	})).isRequired,
-	setFilters: PropTypes.func.isRequired,
-	toggleFilter: PropTypes.func.isRequired
-};
 
 export default Filters;

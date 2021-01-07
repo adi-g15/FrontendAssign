@@ -1,9 +1,23 @@
 /* eslint-disable no-useless-escape */
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import "../styles/filter.css";
 
-function FilterField(props) {
+interface field_props {
+	filter?: filter,
+	lastFieldHandler: Function,
+	spare_operations: {	// CONST
+		name: string,
+		opr: string[],
+		type: string,
+		key_name: string
+	}[],
+	ALL_OPERATIONS: operation[],
+	index: number,
+	removeFilter: Function,
+	toggleFilter: Function
+};
+
+function FilterField(props: field_props) {
 	const [name, setName] = useState( props.filter.name || '');
 	const [operator, setOperator] = useState( props.filter.opr || '');
 	const [val, setValue] = useState( props.filter.val || '');
@@ -108,30 +122,5 @@ function FilterField(props) {
 		</div>
 	);
 }
-
-FilterField.propTypes = {
-	filter: PropTypes.shape({
-		name: PropTypes.string,
-		opr: PropTypes.string,
-		val: PropTypes.string,
-		key_name: PropTypes.string
-	}),
-	lastFieldHandler: PropTypes.func,
-	spare_operations: PropTypes.arrayOf(PropTypes.shape({	// CONST
-		name: PropTypes.string.isRequired,
-		opr: PropTypes.arrayOf(PropTypes.string).isRequired,
-		type: PropTypes.string.isRequired,
-		key_name: PropTypes.string
-	})).isRequired,
-	ALL_OPERATIONS: PropTypes.arrayOf(PropTypes.shape({	// CONST
-		name: PropTypes.string.isRequired,
-		opr: PropTypes.arrayOf(PropTypes.string).isRequired,
-		type: PropTypes.string.isRequired,
-		key_name: PropTypes.string
-	})).isRequired,
-	index: PropTypes.number.isRequired,
-	removeFilter: PropTypes.func.isRequired,
-	toggleFilter: PropTypes.func.isRequired
-};
 
 export default FilterField;

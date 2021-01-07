@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from "prop-types";
 import DataField from "./dataField";
 import "../styles/data.css";
 import { CONTAINS, EQUALS, GTE, LTE } from '../constants/opTypes';
@@ -9,11 +8,14 @@ import "firebase/firestore";
 import firebaseConfig from "../config/firebase";
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
 
-// fetchProfiles().then(profiles => profiles.forEach(profile => db.collection("profiles").add(profile)));
-function DataTable(props) {
+interface datatable_props {
+	filters: filter[],
+	shouldFilter: boolean
+}
+
+function DataTable(props: datatable_props) {
 	const [profiles, setProfiles] = useState([]);
 	const [noResult, toggleNoResult] = useState(false);
 	const [loading, toggleLoading] = useState(true);
@@ -123,14 +125,5 @@ function DataTable(props) {
 		</div>
 	);
 }
-
-DataTable.propTypes = {
-	filters: PropTypes.arrayOf( PropTypes.shape({
-		name: PropTypes.string,
-		opr: PropTypes.string,
-		val: PropTypes.string
-	})).isRequired,
-	shouldFilter: PropTypes.bool.isRequired
-};
 
 export default DataTable;
