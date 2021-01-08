@@ -4,13 +4,13 @@ import { fetchOperations } from "../utils/filters";
 import { getUnusedOperations as getUnusedOper } from '../utils/difference';
 import "../styles/filter.css";
 
-interface filter_props {
-	filters: filter[],
+interface FilterProps {
+	filters: Filter[],
 	setFilters: Function,
 	toggleFilter: Function
 }
 
-function Filters(props: filter_props) {
+function Filters(props: FilterProps) {
 	const {filters, setFilters} = props;
 
 	const [lastFilterEmpty, toggleEmpty] = useState(false);	// signifies whether the last filter added is empty/not yet full
@@ -20,7 +20,8 @@ function Filters(props: filter_props) {
 
 	useEffect(() => {
 		fetchOperations()
-			.then(docs => ALL_OPERATIONS.push(...docs));
+			.then(docs => ALL_OPERATIONS.push(...docs))
+			.catch(console.error);
 	});
 
 	async function addEmptyField() {

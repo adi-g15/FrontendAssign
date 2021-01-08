@@ -1,12 +1,12 @@
 /**
- * 
+ *
  * @param {Array[Operations]} operationArr (const)
- * 
+ *
  * @note - Won't work in ALL cases, works for basic and current case
- * 
+ *
  * @returns copy of operations array, containing copies of previous array
  */
-function deepCopy( operationArr: operation[] ) {
+function deepCopy( operationArr: Operation[] ) {
 	if( !Array.isArray(operationArr) )	return null;
 
 	return operationArr.map(obj => ({
@@ -18,15 +18,15 @@ function deepCopy( operationArr: operation[] ) {
 /**
  * @note - Both arguments are actually of different types, but both ideally will be having a `name` argument, that determines their uniqueness
  * 		   Also, when a operation has multiple supported con, then the operation will have more possibilities
- * 
+ *
  * @param {Array[Operations]} allOperations (const)
- * 
+ *
  * @param {Array[Filters]} usedFilters (const)
- * 
+ *
  * @returns {Array[Operations]} - Operations that can still be used
  * 								  Also the operator 'opr' in these objects are only the delta ones
  */
-export function getUnusedOperations( allOperations: operation[], usedFilters: filter[] ) {
+export function getUnusedOperations( allOperations: Operation[], usedFilters: Filter[] ) {
 	if( !Array.isArray(allOperations) || !Array.isArray(usedFilters) ) {
 		return allOperations;
 	}
@@ -34,7 +34,7 @@ export function getUnusedOperations( allOperations: operation[], usedFilters: fi
 	// `type checking`... could have used typescript, but already far in the assignment, kaun dependency badhaye ab ;(
 	if(
 		!allOperations.every(operation => (operation.name && Array.isArray(operation.opr)))
-		|| !usedFilters.every(filter => (filter.name && filter.opr)) 
+		|| !usedFilters.every(filter => (filter.name && filter.opr))
 	){
 		return allOperations;
 	}

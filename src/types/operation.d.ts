@@ -1,4 +1,4 @@
-interface operation {
+interface Operation {
     name: string,
     opr: string[],
     type: string,

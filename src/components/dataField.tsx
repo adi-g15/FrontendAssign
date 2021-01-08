@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/data.css";
 
-interface field_props {
+interface DataProps {
 	name: string,
 	screen_name: string,
 	followers_count: number | 0,
@@ -10,7 +10,7 @@ interface field_props {
 	verified: boolean | false
 }
 
-function DataField(props: field_props) {
+function DataField(props: DataProps) {
 	return (
 		<tr className="data_field">
 			<td>{props.name}</td>
