@@ -6,7 +6,7 @@
  *
  * @returns copy of operations array, containing copies of previous array
  */
-function deepCopy( operationArr: operation[] ) {
+function deepCopy( operationArr: Operation[] ) {
 	if( !Array.isArray(operationArr) )	return null;
 
 	return operationArr.map(obj => ({
@@ -26,7 +26,7 @@ function deepCopy( operationArr: operation[] ) {
  * @returns {Array[Operations]} - Operations that can still be used
  * 								  Also the operator 'opr' in these objects are only the delta ones
  */
-export function getUnusedOperations( allOperations: operation[], usedFilters: filter[] ) {
+export function getUnusedOperations( allOperations: Operation[], usedFilters: Filter[] ) {
 	if( !Array.isArray(allOperations) || !Array.isArray(usedFilters) ) {
 		return allOperations;
 	}

@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/filter.css";
 
-interface field_props {
-	filter?: filter,
+interface FieldProps {
+	filter?: Filter,
 	lastFieldHandler: Function,
 	spare_operations: {	// CONST
 		name: string,
@@ -11,13 +11,13 @@ interface field_props {
 		type: string,
 		key_name: string
 	}[],
-	ALL_OPERATIONS: operation[],
+	ALL_OPERATIONS: Operation[],
 	index: number,
 	removeFilter: Function,
 	toggleFilter: Function
 };
 
-function FilterField(props: field_props) {
+function FilterField(props: FieldProps) {
 	const [name, setName] = useState( props.filter.name || '');
 	const [operator, setOperator] = useState( props.filter.opr || '');
 	const [val, setValue] = useState( props.filter.val || '');

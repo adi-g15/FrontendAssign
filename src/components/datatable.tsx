@@ -10,12 +10,12 @@ import firebaseConfig from "../config/firebase";
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-interface datatable_props {
-	filters: filter[],
+interface DatatableProps {
+	filters: Filter[],
 	shouldFilter: boolean
 }
 
-function DataTable(props: datatable_props) {
+function DataTable(props: DatatableProps) {
 	const [profiles, setProfiles] = useState([]);
 	const [noResult, toggleNoResult] = useState(false);
 	const [loading, toggleLoading] = useState(true);
@@ -54,13 +54,13 @@ function DataTable(props: datatable_props) {
 					break;
 
 				case GTE:
-					if( profile[filter.key_name] < parseInt(filter.val) ){
+					if( profile[filter.key_name] < parseInt(filter.val, 10) ){
 						return false;
 					}
 					break;
 
 				case LTE:
-					if( profile[filter.key_name] > parseInt(filter.val) ){
+					if( profile[filter.key_name] > parseInt(filter.val, 10) ){
 						return false;
 					}
 					break;
